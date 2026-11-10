@@ -1,0 +1,2382 @@
+/*
+ * Author       : tharunikka.a.2024.cse_raj97
+ * Generated on : 10-Nov-2026 21:11:30
+ * Version      : 1.0
+ */
+ application "Insurance Claim Request & Processing Management"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Claim_Request_Form
+		{
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Claimant_Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Claimant_Type
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Policyholder","Nominee","Third Party"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Policy_Number
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Email_Address
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Contact_Number
+			(
+    			type = phonenumber
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Residential_Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Claim_Type
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Motor Insurance","Health Insurance","Home Insurance","Life Insurance"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Date_Of_Incident
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Claim_Amount_Requested
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Supporting_Documents_Available
+			(
+				type = list	
+				values = {"Photographs","Police FIR Copy","Repair Estimate"}
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Incident_Description
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Preferred_Callback_Time
+			(
+    			type = time
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Declaration_Of_Authenticity
+			(
+				type = checkboxes	
+				values = {"I declare that the information provided is true and accurate"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Policy_Details_Lookup
+			(
+				type = picklist	
+				values  = Policies.ID
+    			displayformat = [Policy_Number]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Damage_Photo
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Repair_Estimate_Upload
+			(
+    			type = upload file
+				browse = local_drive
+				allowed file formats = {"pdf","jpg","png","jpeg"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Policy_Sum_Insured_Lakhs
+			(
+				type = decimal
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Estimated_Repair_Cost
+			(
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Depreciation_Percent
+			(
+    			type = percentage
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Witness_Details
+			(
+				type = grid
+				maxrow = 4
+				Witness_Name
+				(
+    				type = text
+					width = medium
+				)
+				Witness_Contact_Number
+				(
+    				type = text
+					width = medium
+				)
+				Witness_Statement
+				(
+    				type = textarea
+					height = 100px
+					width = medium
+				)
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			must have Is_Third_Party_Involved
+			(
+    			type = checkbox
+				initial value = false
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Claim_Process_Guidelines_Display
+			(
+    			type = richtext
+				height = 200px
+				toolbar = enable
+				[
+					style, font-color, background-color, link, bullets-and-numbering, 
+					font-size : {1, 2, 3, 4, 5, 6, 7}
+				]
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			FIR_Copy_Online_Link
+			(
+    			type = url
+				enable  linkname
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Accident_Scene_Video
+			(
+    			type = video
+    			duration=60
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Incident_Voice_Statement
+			(
+     			type = audio
+    			duration=60
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			must have Claimant_Digital_Signature
+			(
+    			type = signature
+	 			row = 3
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Claim_Submitted_On
+			(
+    			type = datetime
+				initial value = "${zoho.currenttime}"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Claim_Reference_ID
+			(
+    			type = autonumber
+				start index = 1
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Net_Payable_Amount
+			(
+				type = decimal
+	 			row = 3
+	 			column = 1   
+				width = medium
+    			Formula_Properties
+    			(
+    						value =  input.Estimated_Repair_Cost - input.Estimated_Repair_Cost * input.Depreciation_Percent / 100 - input.Policy_Deductible
+    						visibility = true
+    			)
+			)
+			Policy_Deductible
+			(
+				type = INR
+				format = commadotindian
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			QR_Code
+			(
+				type = qrcode
+				displayname = "Claim_Tracking_QR_Code"
+				value = "${Claim_Reference_ID}"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Submitted","Under Investigation","Approved","Settled","Rejected"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Investigation_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Not Started","In Progress","Completed"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Surveyor_Assigned
+			(
+    			type = text
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Settlement_Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Pending","Paid","Failed"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Submitted","Under Investigation","Approved","Settled","Rejected"}
+			}
+		}
+		form Policies
+		{
+			success message = "Policy Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Policy_Number
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Coverage_Type
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Sum_Insured_Lakhs
+			(
+				type = decimal
+				displayname = "Sum_Insured_Lakhs	"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Valid_Till
+			(
+    			type = date
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Policy_Deductible
+			(
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list Claim_Request_Form_Report
+		{
+			displayName = "Claim_Request_Form Report"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Witness_Details.Witness_Name as "Witness_Details"
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Policy_Deductible
+				Net_Payable_Amount
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+		}
+		default list All_Policies
+		{
+			displayName = "All Policies"
+			show all rows from Policies    
+			(
+				Policy_Number
+				Coverage_Type
+				Sum_Insured_Lakhs as "Sum_Insured_Lakhs	"
+				Valid_Till
+				Policy_Deductible
+			)
+		}
+		list All_Claims_List
+		{
+			displayName = "All_Claims_List"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+			filters
+			(
+				Claim_Type
+				Claimant_Type
+				Status
+			)
+			sort by
+			(
+				Date_Of_Incident descending
+			)
+		}
+		spreadsheet Claims_Spreadsheet
+		{
+			displayName = "Claims_Spreadsheet"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+		}
+		kanban Claim_Status_Kanban
+		{
+			displayName = "Claim_Status_Kanban"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+			options
+			(
+	 			display field = Status
+	 		)
+		}
+		calendar Incident_Date_Calendar
+		{
+			displayName = "Incident_Date_Calendar"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+			options
+			(
+				display field = Claim_Type
+				start date = Date_Of_Incident
+			)
+		}
+		map Claimant_Location_Map
+		{
+			displayName = "Claimant_Location_Map"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+			options
+			(
+	 			display field = Residential_Address
+	 		)
+		}
+		timeline Claim_Activity_Timeline
+		{
+			displayName = "Claim_Activity_Timeline"
+			show all rows from Claim_Request_Form    
+			(
+				Claimant_Name 
+				Claimant_Type
+				Policy_Number
+				Email_Address
+				Contact_Number
+				(
+					displayformat = plainnumber 
+				)
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Claim_Type
+				Date_Of_Incident
+				Claim_Amount_Requested
+				Supporting_Documents_Available
+				Incident_Description
+				Preferred_Callback_Time
+				Declaration_Of_Authenticity
+				Policy_Details_Lookup
+				Damage_Photo
+				Repair_Estimate_Upload
+				Policy_Sum_Insured_Lakhs
+				Estimated_Repair_Cost
+				Depreciation_Percent
+				Is_Third_Party_Involved
+				Claim_Process_Guidelines_Display
+				FIR_Copy_Online_Link
+				Accident_Scene_Video
+				Incident_Voice_Statement
+				Claimant_Digital_Signature
+				Claim_Submitted_On
+				Claim_Reference_ID
+				Net_Payable_Amount
+				Policy_Deductible
+				QR_Code as "Claim_Tracking_QR_Code"
+				Status
+				Investigation_Status
+				Surveyor_Assigned
+				Settlement_Status
+			)
+			options
+			(
+				display field = Claimant_Name
+				start date = Claim_Submitted_On
+			)
+		}
+		pivottable ClaimType_By_ClaimantType_Pivot
+		{
+			displayname = "ClaimType_By_ClaimantType_Pivot"
+			based on Autoview_1794301857693_Claim_Request_Form
+				show all rows from Claim_Request_Form
+				(
+			Claimant_Name 
+ 			(
+ 				first_name as "Claimant_Name"
+ 				prefix as "Claimant_Name.Prefix"
+ 				last_name as "Claimant_Name.Last Name"
+ 				suffix as "Claimant_Name.Suffix"
+ 			)
+			Claimant_Type 
+			Policy_Number 
+			Email_Address 
+				)
+		}
+	}
+	pages
+	{
+		page Claims_Command_Center_Page
+		{
+			displayname = "Claims_Command_Center_Page"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<search \n\telementName='Claim_Search_Bar'\n\tpaddingTop = '40px'\n\tpaddingLeft = '80px'\n\tpaddingRight = '80px'\n\tpaddingBottom = '40px'\n\tbgtype = 'none'\n\tbgColor = '#FFFFFF'\n\n\tshape = 'rounded'\n\tresultComponent = 'report'\n\tlinkName = 'Claim_Request_Form_Report'\n\ttarget = 'popup'\n\tcriteriaString = 'Claimant_Name.first_name.contains(input.searchString) || Policy_Number.contains(input.searchString)'\n\tfontFamily = 'default'\n\tappLinkName = 'thisapp'\n\tstyle = '4'\n\tplaceholder = 'Search by claimant name, policy number or claim ID'\n\n>\n<searchbar color=\"#000000\" bgColor=\"#FFFFFF\" fontSize=\"15px\"\n/><searchbutton color=\"#FFFFFF\" bgColor=\"#0072F4\" \nfontSize=\"15px\"  /></search>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<panel elementName='Command_Center_Main_Panel'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#FF4C2F'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n    borderColor = '#FF4C2F'\n    borderWidth = '0px'\n\n\t  value = 'thisapp.Claim_Request_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#333333'\n    borderWidth = '0px'\n\n\t  value = 'Total Claims'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='50%'\n   \t>\n\t<form \n\telementName='Quick_Counter_Claim_Intake_Form'\n\n\tappLinkName = 'thisapp'\n\tlinkName = 'Claim_Request_Form'\n\theightType = 'auto'\n\turlType = 'none'\n\tzc_SuccMsg = 'Claim filed successfully. The claimant will receive an acknowledgement email'\n\tzc_Header = 'false'\n\tzc_SubmitVal = 'Submit Claim'\n/> \n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<chart \n\telementName='ClaimType_Distribution_Chart_Widget'\n\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Claim_Request_Form'\n\txfield = 'Claim_Type'\n\tyfields = 'count:Claim_Reference_ID'\n\tshowDataLabel = 'true'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Send_Document_Reminder_Button'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\tvAlign = 'middle'\n>\n\t<button \n\t\tmargin = '0px'\n\tpaddingTop = '12px'\n\tpaddingLeft = '15px'\n\tpaddingRight = '15px'\n\tpaddingBottom = '12px'\n\n\tcolor = '#FFFFFF'\n\tsize = '16px'\n    borderColor = '#FFFFFF'\n    borderWidth = '0px'\n\ttext ='Send Document Reminder'\n\t\tbgColor = 'theme'\n\t\tcornerRadius = '60px' \n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<board\n    \n\tbgColor = '#FFFFFF'\n        bgColorType = 'solid'\n\tpadding = '0px'\nelementName='Claim_Status_Board'\n    layoutType = 'grid'\n        items = '2'\n    appLinkName = 'thisapp'\n    formLinkName = 'Claim_Request_Form'\n    rankOrder = 'lowestToHighest'\n    limit = '15'\n    groupBy = 'Status'\n>\n<boardHeader>\n    <pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '14px'\n\tpaddingLeft = '15px'\n\tpaddingRight = '15px'\n\tpaddingBottom = '14px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#000000'\n\tsize = '16px'\n\tbold = 'true' \n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#000000'\n    borderWidth = '0px'\n\n\t  value = 'Claim Status Board'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</boardHeader>\n<boardLayout\n                paddingRight = '15px'\n                paddingBottom = '14px'\n                paddingLeft = '15px'\n                paddingTop = '2px'\n                itemGap = '10px'\n>\n    <pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '10px'\n\n    borderColor = '#F2F2F2'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginBottom = '10px'\n\n    borderWidth = '0px'\n\tcolor = '#000000'\n\tbgColor = '#F7F7FB'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'shopping-mobile-cart'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginBottom = '10px'\n\tcolor = '#000000'\n\tsize = '16px'\n\ttype = 'boardData'\n\n\n    lineHeight = '22'\n    numOfLines = '1'\n\n\n\n\n\n\t  value = 'groupedField'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = 'theme'\n\tsize = '21px'\n\tbold = 'true' \n\ttype = 'Aggregate'\n\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\tcornerRadius = '0px'\n\n    lineHeight = '28'\n    numOfLines = '1'\n\n\n\n\n    borderColor = '#5051F9'\n    borderWidth = '0px'\n\n\t  value = 'ID.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</boardLayout>\n</board>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Full_Claims_Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'Claim_Request_Form_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<dsp id='html_snippet' elementName='HTML Snippet'\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet()\ncontent\n&lt;%{\n\t%&gt;\n&lt;div style=&quot;padding:12px;font-family:sans-serif;font-size:14px;&quot;&gt;\n  &lt;h3&gt;Claim Process Guidelines&lt;/h3&gt;\n  &lt;ol&gt;\n    &lt;li&gt;Submit the claim with policy number and incident details.&lt;/li&gt;\n    &lt;li&gt;Keep all original bills and estimates.&lt;/li&gt;\n    &lt;li&gt;A surveyor will contact you within 48 hours.&lt;/li&gt;\n    &lt;li&gt;Do not repair the vehicle before inspection.&lt;/li&gt;\n    &lt;li&gt;The claim is verified, investigated, then approved or rejected.&lt;/li&gt;\n    &lt;li&gt;Approved claims are settled to the registered bank account.&lt;/li&gt;\n  &lt;/ol&gt;\n  &lt;h4&gt;Required Documents&lt;/h4&gt;\n  &lt;ul&gt;\n    &lt;li&gt;Photographs of the damage&lt;/li&gt;\n    &lt;li&gt;Police FIR copy&lt;/li&gt;\n    &lt;li&gt;Repair estimate or medical bill&lt;/li&gt;\n    &lt;li&gt;Policy document&lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/div&gt;\n&lt;%\n\n}%&gt;]]>\n</dsp>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<gauge \n\telementName='Monthly_Settlement_Target_Gauge'\n\n\tcolor = '#000000'\n\tsize = '20px'\n\tfontFamily = 'default' \n\tbgColor = '#FFFFFF'\n\ttheme = '#FF7B19'\n\tdisplayType = 'actual'\n\ttype = '4'\n\tfilledColor = '#FF7B19'\n\tnonFilledColor = '#F5F5F5'\n\tvalue = 'thisapp.Claim_Request_Form.ID.count'\n\t\tcriteria = 'Status == &quot;Settled&quot;'\n>\n<maximumvalue size=\"15px\" color=\"#7F7F7F\" value=\"10\" \n/>\n</gauge>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 void sendDocumentReminders()
+                 {
+                 }
+			 }
+		 }
+
+
+		workflow
+		{
+		form
+		{
+			Block_Future_Incident_Dat as "Block_Future_Incident_Date"
+			{
+				type =  form
+				form = Claim_Request_Form
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Date_Of_Incident != null && input.Date_Of_Incident > zoho.currentdate)
+										{
+											alert "Date of Incident cannot be a future date.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Block_Negative_Numbers as "Block_Negative_Numbers"
+			{
+				type =  form
+				form = Claim_Request_Form
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Claim_Amount_Requested != null && input.Claim_Amount_Requested <= 0)
+										{
+											alert "Claim Amount Requested must be a positive value.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Repair_Cost_And_ as "Validate_Repair_Cost_And_Depreciation"
+			{
+				type =  form
+				form = Claim_Request_Form
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Estimated_Repair_Cost != null && input.Estimated_Repair_Cost < 0)
+										{
+											alert "Estimated Repair Cost cannot be negative.";
+											cancel submit;
+										}
+										if(input.Depreciation_Percent != null && input.Depreciation_Percent < 0 || input.Depreciation_Percent > 50)
+										{
+											alert "Depreciation Percent must be between 0 and 50.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Autofill_Policy_Details as "Autofill_Policy_Details"
+			{
+				type =  form
+				form = Claim_Request_Form
+
+				record event = on add or edit
+
+				on user input of Policy_Details_Lookup
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Policy_Details_Lookup != null)
+										{
+											policyRec = Policies[ID == input.Policy_Details_Lookup];
+											input.Policy_Sum_Insured_Lakhs = policyRec.Sum_Insured_Lakhs;
+											input.Policy_Deductible = policyRec.Policy_Deductible;
+										}
+						)
+					}
+				}
+
+			}
+			Load_Claim_Guidelines as "Load_Claim_Guidelines"
+			{
+				type =  form
+				form = Claim_Request_Form
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Claim_Process_Guidelines_Display = "<b>Claim Process Guidelines</b><ul><li>Keep all original bills and estimates.</li><li>A surveyor will contact you within 48 hours.</li><li>Do not repair the vehicle before inspection.</li></ul>";
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			Daily_Missing_Document_Re as "Daily_Missing_Document_Reminder_Schedule"
+			{
+				type =  schedule
+				start = "2026-11-10 10:00:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						pending = Claim_Request_Form[Repair_Estimate_Upload == null && Status != "Settled" && Status != "Rejected"];
+										for each  r in pending
+										{
+											if(r.Email_Address != null)
+											{
+												sendmail
+												[
+													from :zoho.adminuserid
+													to :r.Email_Address
+													subject :"Documents pending for " + r.Claim_Reference_ID
+													message :"Please upload your repair estimate to proceed with your claim."
+												]
+											}
+										}
+					)
+					}
+				}
+			}
+		}
+
+		approval
+		{
+			HighValue_Claim_Approval as "HighValue_Claim_Approval"
+			{
+				type =  approval
+				form = Claim_Request_Form[Net_Payable_Amount > 100000]
+				display fields = [Claimant_Name,Claimant_Type,Policy_Number,Email_Address,Contact_Number,Residential_Address,Claim_Type]
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						input.Status = "Pending Senior Approval";
+					)
+					}
+				}
+				on level 1
+				{
+					on approve 
+					{
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+						actions 
+						{
+						on load
+						(
+							input.Status = "Approved";
+						)
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+						actions 
+						{
+						on load
+						(
+							input.Status = "Rejected";
+						)
+						}
+						actions 
+						{
+						on load
+						(
+							input.Status = "Rejected";
+						)
+						}
+					}
+				}
+			}
+		}
+
+		blueprint
+		{
+    			Claim_Lifecycle_Blueprint as "Claim_Lifecycle_Blueprint"
+    			{
+        			type = Blueprint
+        			form = Claim_Request_Form
+        			start
+        			{
+            			start stage = "Submitted"
+            			chart data
+            			{
+                			from port : B
+                			to port   : T3
+                			position  : "-31 0"
+                			path      : [-3.150000000000004,36.84,-3.150000000000004,46.84,-3.150000000000004,48.42,-3.1499999999999986,48.42,-3.1499999999999986,50,-3.1499999999999986,60]
+            			}
+        			}
+        			stages
+        			{
+           			"Submitted"
+           			{
+               			chart data
+               			{
+                   			position : "-56.62154337661471 60"
+               			}
+           			}
+           			"Under Investigation"
+           			{
+               			chart data
+               			{
+                   			position : "-70 214.31579758950204"
+               			}
+           			}
+           			"Approved"
+           			{
+               			chart data
+               			{
+                   			position : "-174 381.31579758950204"
+               			}
+           			}
+           			"Settled"
+           			{
+               			chart data
+               			{
+                   			position : "-172 499.3157975895019"
+               			}
+           			}
+           			"Rejected"
+           			{
+               			chart data
+               			{
+                   			position : "92 382.31579758950204"
+               			}
+           			}
+        			}
+        			transitions
+        			{
+    				Approve_Claim as "Approve Claim"
+    				{
+         				type = normal
+         				from stage = "Under Investigation"
+         				to stage = "Approved"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : B2
+             				to port   : T2
+             				path      : [-11.760644869691752,265.92362738472366,-11.760644869691752,275.92362738472366,-11.760644869691752,323.61971248711285,-136.10262993642354,323.61971248711285,-136.10262993642354,371.31579758950204,-136.10262993642354,381.31579758950204]
+        				}
+  				}
+    				Reject_Claim as "Reject Claim"
+    				{
+         				type = normal
+         				from stage = "Under Investigation"
+         				to stage = "Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [12.609032695462375,265.92362738472366,12.609032695462375,275.92362738472366,12.609032695462375,324.11971248711285,140.78505045669283,324.11971248711285,140.78505045669283,372.31579758950204,140.78505045669283,382.31579758950204]
+        				}
+  				}
+    				Settle_Claim as "Settle Claim"
+    				{
+         				type = normal
+         				from stage = "Approved"
+         				to stage = "Settled"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [-121.9039449046353,432.92362738472366,-121.9039449046353,442.92362738472366,-121.9039449046353,466.1197124871128,-128.3984517405728,466.1197124871128,-128.3984517405728,489.3157975895019,-128.3984517405728,499.3157975895019]
+        				}
+  				}
+    				Start_Investigation as "Start Investigation"
+    				{
+         				type = normal
+         				from stage = "Submitted"
+         				to stage = "Under Investigation"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T2
+             				path      : [-3.1499999999999986,111.60782979522162,-3.1499999999999986,121.60782979522162,-3.1499999999999986,162.96181369236183,-11.760644869691752,162.96181369236183,-11.760644869691752,204.31579758950204,-11.760644869691752,214.31579758950204]
+        				}
+  				}
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "ICR"
+			background color = "theme"
+			foreground color = "#ffffff"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form Claim_Request_Form
+			{
+				label placement = left
+			}
+			form Policies
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report Claim_Request_Form_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Witness_Details.Witness_Name as "Witness_Details"
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Policy_Deductible
+								Net_Payable_Amount
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Policies
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Policy_Number
+								Coverage_Type
+								Sum_Insured_Lakhs as "Sum_Insured_Lakhs	"
+								Valid_Till
+								Policy_Deductible
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Policy_Number
+								Coverage_Type
+								Sum_Insured_Lakhs as "Sum_Insured_Lakhs	"
+								Valid_Till
+								Policy_Deductible
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Claims_List
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Policy_Number
+								Claim_Type
+								Claim_Amount_Requested
+								Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Claims_Spreadsheet
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -3
+						datablock1
+						(
+							layout type = -3
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Claim_Status_Kanban
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								Claimant_Name
+								Claim_Type
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Incident_Date_Calendar
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Claimant_Location_Map
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Claim_Activity_Timeline
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Claimant_Name
+								Claimant_Type
+								Policy_Number
+								Email_Address
+								Contact_Number
+								Residential_Address
+								Claim_Type
+								Date_Of_Incident
+								Claim_Amount_Requested
+								Supporting_Documents_Available
+								Incident_Description
+								Preferred_Callback_Time
+								Declaration_Of_Authenticity
+								Policy_Details_Lookup
+								Damage_Photo
+								Repair_Estimate_Upload
+								Policy_Sum_Insured_Lakhs
+								Estimated_Repair_Cost
+								Depreciation_Percent
+								Is_Third_Party_Involved
+								Claim_Process_Guidelines_Display
+								FIR_Copy_Online_Link
+								Accident_Scene_Video
+								Incident_Voice_Statement
+								Claimant_Digital_Signature
+								Claim_Submitted_On
+								Claim_Reference_ID
+								Net_Payable_Amount
+								Policy_Deductible
+								QR_Code as "Claim_Tracking_QR_Code"
+								Status
+								Investigation_Status
+								Surveyor_Assigned
+								Settlement_Status
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Claim_Request_Form
+				{
+					displayname = "Claim_Request_Form"
+					icon = "tech-desktop"
+					form  Claim_Request_Form
+					{
+						icon = "tech-desktop"
+					}
+					report Claim_Request_Form_Report
+					{
+						icon = "tech-desktop"
+					}
+					report All_Claims_List
+					{
+						icon = "tech-desktop"
+					}
+					report Claims_Spreadsheet
+					{
+						icon = "tech-desktop"
+					}
+					report Claim_Status_Kanban
+					{
+						icon = "tech-desktop"
+					}
+					report Incident_Date_Calendar
+					{
+						icon = "tech-desktop"
+					}
+					report Claimant_Location_Map
+					{
+						icon = "tech-desktop"
+					}
+					report Claim_Activity_Timeline
+					{
+						icon = "tech-desktop"
+					}
+ 
+					report ClaimType_By_ClaimantType_Pivot
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Policies
+				{
+					displayname = "Policies"
+					icon = "users-2-police"
+					form  Policies
+					{
+						icon = "users-2-police"
+					}
+					report All_Policies
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Claims_Command_Center_Page
+				{
+					displayname = "Claims_Command_Center_Page"
+					icon = "tech-desktop"
+					page Claims_Command_Center_Page
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = amethyst
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+	reports configuration
+	{
+	
+		Version = 2000057066113
+		Key     = "afAS7jOFr9zxCa5SS9sOdTkFn99A3h39xVhkR2ayjxrWEEz03q4GPSrMJrwnHBUeGJeu1FSWCynThm43j9bmwzWS0OFgEN3nMVs0"
+	}
+}
